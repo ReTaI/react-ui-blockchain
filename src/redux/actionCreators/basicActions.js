@@ -1,10 +1,10 @@
 import BasicActionTypes from "../actions/BasicActionTypes";
 
-export const signin = (role, address) => {
+export const signin = (data) => {
     return {
         type: BasicActionTypes.SIGNIN,
-        address,
-        role,
+        address: data.address,
+        role: data.role,
     }
 };
 
