@@ -1,66 +1,39 @@
-import { Card } from '@mui/material';
 import React, { memo, useState } from 'react';
-import { FormGroup, TextField, Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { signin } from '../../redux/actionCreators/basicActions';
+import { FormGroup, TextField, Button, Checkbox } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { signin, signup, logout } from '../../redux/actionCreators/basicActions';
+import { authorization, registerOwner, registerSupplier } from '../../API';
+import { addresses } from '../../addresses';
 
-const StartPage = ({ contract }) => {
-    const [ signinAddress, setSigninAddress ] = useState('');
-    const [ signinPassword, setSigninPassword ] = useState('');
-    const [ signupAddress, setSignupAddress ] = useState('');
-    const [ signupPassword, setSignupPassword ] = useState('');
-    const [ repeatSignupPassword, setRepeatSignupPassword ]= useState('');
+const StartPage = () => {
+    const [ isChecked, setIsChecked ] = useState(false);
+
+    const { role } = useSelector(store => store.basicReducer);
 
     const dispatch = useDispatch();
-
-    const handleSigninAddressChange = (event) => {
-        setSigninAddress(event.target.value);
-    };
-    const handleSigninPasswordChange = (event) => {
-        setSigninPassword(event.target.value);
-    }
     const handleSignin = () => {
-
-        contract.methods.authorization(signinAddress, signinPassword).call().then((data) => dispatch(signin({ address: signinAddress, role: 2})));
-    }
-    const handleSignupPasswordChange = (event) => {
-        setSignupPassword(event.target.value);
-    }
-    const handleSignupAddressChange = (event) => {
-        setSignupAddress(event.target.value);
-    }
-    const handleRepeatSignupPasswordChange = (event) => {
-        setRepeatSignupPassword(event.target.value);
-    }
+        authorization().then((data) => {
+          console.log(data);
+          dispatch(signin(data, addresses.owner))
+        });
+    };
     const handleSignup = () => {
-        //contract signup call
-        console.log('front', signupAddress);
-        contract.methods.registerUser(signupAddress, 2, repeatSignupPassword, signupPassword).call().then((data) => console.log(data));
+      isChecked 
+      ? registerOwner().then((data) => console.log(data)).then(() => dispatch(signup(1, addresses.owner)))
+      : registerSupplier().then((data) => console.log(data)).then(() => dispatch(signup(3, addresses.supplier)))
+    };
+    const handleCheckChange = (event) => {
+      setIsChecked(event.target.checked);
+    }
+    const handleLogout = () => {
+      dispatch(logout());
     }
 
     return (
+      !role
+      ? (
         <div style={{ display: 'flex', justifyContent: 'space-around', alignContent: 'center'}}>
             <div style={{ width: 600 }}>
-            <FormGroup>
-        <TextField
-          label="Address"
-          variant="standard"
-          type="text"
-          onChange={handleSigninAddressChange}
-          value={signinAddress}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextField
-          label="Password"
-          variant="standard"
-          type="password"
-          onChange={handleSigninPasswordChange}
-          value={signinPassword}
-          required
-        />
-      </FormGroup>
       <FormGroup>
         <Button
           type="submit"
@@ -69,38 +42,9 @@ const StartPage = ({ contract }) => {
         >
           SIGN IN
         </Button>
-      </FormGroup>
-            </div>
-            <div style={{ width: 600 }}>
-            <FormGroup>
-        <TextField
-          label="Address"
-          variant="standard"
-          type="text"
-          onChange={handleSignupAddressChange}
-          value={signupAddress}
-          required
-        />
-      </FormGroup>
+        </FormGroup>
       <FormGroup>
-        <TextField
-          label="Password"
-          variant="standard"
-          type="password"
-          onChange={handleSignupPasswordChange}
-          value={signupPassword}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextField
-          label="Repeat Password"
-          variant="standard"
-          type="password"
-          onChange={handleRepeatSignupPasswordChange}
-          value={repeatSignupPassword}
-          required
-        />
+        <Checkbox label='Owner' checked={isChecked} onChange={handleCheckChange}/>
       </FormGroup>
       <FormGroup>
         <Button
@@ -113,6 +57,18 @@ const StartPage = ({ contract }) => {
       </FormGroup>
             </div>
         </div>
+      )
+      : (
+        <FormGroup>
+        <Button
+          type="submit"
+          value="submit"
+          onClick={handleLogout}
+        >
+          LOG OUT
+        </Button>
+      </FormGroup>
+      )
     )
 }
 

@@ -3,27 +3,6 @@ export const abi = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "admin",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "fullname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "password",
-				"type": "string"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "userAddress",
 				"type": "address"
 			},
@@ -36,12 +15,12 @@ export const abi = [
 		"name": "authorization",
 		"outputs": [
 			{
-				"internalType": "bool",
+				"internalType": "uint256",
 				"name": "",
-				"type": "bool"
+				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -61,6 +40,70 @@ export const abi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "supplier",
+				"type": "address"
+			}
+		],
+		"name": "getSupplies",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "toShop",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "month",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Providing.Supply[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "userAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "fullname",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "registerOwner",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -135,47 +178,12 @@ export const abi = [
 		"name": "registerUser",
 		"outputs": [
 			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "id",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "role",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "fullname",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "password",
-						"type": "string"
-					}
-				],
-				"internalType": "struct Providing.User",
+				"internalType": "uint256",
 				"name": "",
-				"type": "tuple"
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address payable",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "sendMoney",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -248,7 +256,35 @@ export const abi = [
 			}
 		],
 		"name": "setSupply",
-		"outputs": [],
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "toShop",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "month",
+						"type": "string"
+					}
+				],
+				"internalType": "struct Providing.Supply",
+				"name": "",
+				"type": "tuple"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -262,11 +298,6 @@ export const abi = [
 		],
 		"name": "users",
 		"outputs": [
-			{
-				"internalType": "address",
-				"name": "id",
-				"type": "address"
-			},
 			{
 				"internalType": "uint256",
 				"name": "role",

@@ -1,10 +1,10 @@
 import BasicActionTypes from "../actions/BasicActionTypes";
 
-export const signin = (data) => {
+export const signin = (role, address) => {
     return {
         type: BasicActionTypes.SIGNIN,
-        address: data.address,
-        role: data.role,
+        address,
+        role,
     }
 };
 
@@ -15,3 +15,16 @@ export const signup = (role, address) => {
         role,
     }
 };
+
+export const logout = () => {
+    return {
+        type: BasicActionTypes.LOGOUT,
+    }
+};
+
+export const setSupply = (data) => {
+    return {
+        type: BasicActionTypes.SET_SUPPLY,
+        payload: data,
+    }
+}

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-    const { address } = useSelector((store) => store.basicReducer)
+    const { address } = useSelector((store) => store.basicReducer);
     return (
         <>
-          <AppBar position="static" id="header">
+          <AppBar position="static" id="header" style={{ flexDirection: 'row' }}>
             <Toolbar>
               <Link to="/" id="homepage" style={{color: 'white', textDecoration: 'none'}}>Blockchain UI Ponomarev</Link>
             </Toolbar>
