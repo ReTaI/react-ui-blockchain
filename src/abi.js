@@ -3,16 +3,11 @@ export const abi = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "userAddress",
+				"name": "user",
 				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "password",
-				"type": "string"
 			}
 		],
-		"name": "authorization",
+		"name": "authUser",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -27,262 +22,128 @@ export const abi = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "userAddress",
+				"name": "user",
 				"type": "address"
-			}
-		],
-		"name": "getRole",
-		"outputs": [
+			},
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "totalArea",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "usefulArea",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
+		"name": "createHouse",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ind",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			}
+		],
+		"name": "createSale",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "supplier",
+				"name": "user",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "role",
+				"type": "uint256"
 			}
 		],
-		"name": "getSupplies",
+		"name": "createUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getHouses",
 		"outputs": [
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
-						"name": "id",
+						"name": "totalArea",
 						"type": "uint256"
 					},
 					{
-						"internalType": "string",
-						"name": "toShop",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "description",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "month",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "usefulArea",
+						"type": "uint256"
 					}
 				],
-				"internalType": "struct Providing.Supply[]",
+				"internalType": "struct Housing.House[]",
 				"name": "",
 				"type": "tuple[]"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "fullname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "password",
-				"type": "string"
-			}
-		],
-		"name": "registerOwner",
-		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "fullname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "password",
-				"type": "string"
-			}
-		],
-		"name": "registerSeller",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "fullname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "password",
-				"type": "string"
-			}
-		],
-		"name": "registerSupplier",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "role",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "fullname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "password",
-				"type": "string"
-			}
-		],
-		"name": "registerUser",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "shopName",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "month",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			}
-		],
-		"name": "setReport",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "role",
-				"type": "uint256"
-			}
-		],
-		"name": "setRole",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "toShop",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "month",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			}
-		],
-		"name": "setSupply",
+		"inputs": [],
+		"name": "getSales",
 		"outputs": [
 			{
 				"components": [
 					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "owner",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalArea",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "usefulArea",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Housing.House",
+						"name": "house",
+						"type": "tuple"
+					},
+					{
 						"internalType": "uint256",
-						"name": "id",
+						"name": "price",
 						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "toShop",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "description",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "month",
-						"type": "string"
 					}
 				],
-				"internalType": "struct Providing.Supply",
+				"internalType": "struct Housing.Sale[]",
 				"name": "",
-				"type": "tuple"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -302,16 +163,6 @@ export const abi = [
 				"internalType": "uint256",
 				"name": "role",
 				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "fullname",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "password",
-				"type": "string"
 			}
 		],
 		"stateMutability": "view",

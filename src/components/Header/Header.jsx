@@ -1,23 +1,29 @@
-import React, { memo } from 'react';
-import { AppBar, Toolbar } from '@mui/material';
+import React, { memo, useState, useEffect } from 'react';
+import { AppBar, Button, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const Header = () => {
-    const { address } = useSelector((store) => store.basicReducer);
+    const role = localStorage.getItem('role');
+
+    const handleLogout = () => {
+        localStorage.removeItem('role');
+        localStorage.removeItem('address');
+    }
     return (
         <>
-          <AppBar position="static" id="header" style={{ flexDirection: 'row' }}>
-            <Toolbar>
-              <Link to="/" id="homepage" style={{color: 'white', textDecoration: 'none'}}>Blockchain UI Ponomarev</Link>
-            </Toolbar>
-            {!!address
-            &&
-            <Toolbar>
-              <Link to={`users/${address}`} id="profile" style={{color: 'white', textDecoration: 'none'}}>Profile</Link>
-            </Toolbar>
-            }
-          </AppBar>
+            <AppBar position="static" id="header" style={{ flexDirection: 'row' }}>
+                <Toolbar>
+                    <Link to="/" id="homepage" style={{ color: 'white', textDecoration: 'none' }}>Blockchain UI Ponomarev</Link>
+                    {!role
+                        ?
+                        <>
+                            <Link to="/signin" id="auth" style={{ color: 'white', textDecoration: 'none', marginLeft: "5%" }}>Sign In</Link>
+                            <Link to="/signup" id="reg" style={{ color: 'white', textDecoration: 'none', marginLeft: "5%" }}>Sign Up</Link>
+                        </>
+                        : <Button variant="outlined" color="error" onClick={handleLogout} style={{marginLeft: "5%"}}>Log out</Button>}
+                        <Link to="/admin" id="reg" style={{ color: 'white', textDecoration: 'none', marginLeft: "5%" }}>Admin</Link>
+                </Toolbar>
+            </AppBar>
         </>
     );
 }
